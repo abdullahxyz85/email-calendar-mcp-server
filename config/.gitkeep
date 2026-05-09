@@ -1,0 +1,5 @@
+# Placeholder for config files
+# This directory stores application credentials and tokens
+# 
+# Important: Never commit credentials to version control!
+# Google credentials should be placed here after downloading from Google Cloud Console
