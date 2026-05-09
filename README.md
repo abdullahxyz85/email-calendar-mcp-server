@@ -1,157 +1,97 @@
-# Email & Calendar Manager MCP Server
+# Email & Calendar MCP Server
 
-An MCP (Model Context Protocol) server that enables Claude to manage emails and calendar events through Google Gmail, Outlook, and Google Calendar integration.
+An MCP (Model Context Protocol) server for Claude to manage Gmail and Google Calendar.
 
 ## Features
 
-- **Email Management**
-  - Search and retrieve emails (Gmail/Outlook)
-  - Compose and send emails
-  - Support for attachments
-  - Email filtering and organization
+- 📧 **5 Email Tools**: Fetch, send, search, mark as read, delete emails
+- 📅 **6 Calendar Tools**: Schedule meetings, check availability, manage events, set reminders
+- 🔐 **OAuth 2.0** with encrypted token storage
+- 🚀 **Easy Claude Desktop Integration**
 
-- **Calendar Management**
-  - Create calendar events
-  - Check calendar availability
-  - Set reminders and tasks
-  - Manage meeting schedules
+## Quick Start
 
-- **Security**
-  - OAuth 2.0 authentication
-  - Secure token storage with encryption
-  - Credential management
-
-## Project Structure
-
-```
-email-calendar-mcp-server/
-├── src/
-│   └── email_calendar_mcp/
-│       ├── __init__.py
-│       ├── main.py                 # MCP Server entry point
-│       ├── auth/
-│       │   ├── __init__.py
-│       │   ├── oauth.py             # OAuth 2.0 flow
-│       │   └── token_manager.py     # Token storage and management
-│       ├── services/
-│       │   ├── __init__.py
-│       │   ├── email_service.py     # Email operations (Gmail/Outlook)
-│       │   └── calendar_service.py  # Calendar operations
-│       ├── tools/
-│       │   ├── __init__.py
-│       │   ├── email_tools.py       # Email tool definitions
-│       │   └── calendar_tools.py    # Calendar tool definitions
-│       └── utils/
-│           ├── __init__.py
-│           ├── logger.py            # Logging configuration
-│           └── config.py            # Configuration management
-├── tests/                           # Unit tests
-├── config/                          # Configuration files
-├── requirements.txt                 # Python dependencies
-├── .env.example                     # Environment variables template
-├── pyproject.toml                   # Project configuration
-└── README.md                        # This file
-```
-
-## Setup Instructions
-
-### 1. Prerequisites
+### Prerequisites
 
 - Python 3.10+
-- Google Cloud account (for Gmail & Calendar)
-- Outlook/Microsoft account (optional)
+- Google Cloud account
 
-### 2. Installation
+### Installation
 
 ```bash
-# Clone the repository
+git clone <repo-url>
 cd email-calendar-mcp-server
 
-# Create virtual environment
 python -m venv venv
-source venv/Scripts/activate  # On Windows
-
-# Install dependencies
+.\venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-### 3. Google Cloud Setup
+### Google Cloud Setup
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project
-3. Enable APIs: Gmail API and Google Calendar API
-4. Create OAuth 2.0 credentials (OAuth Consent Screen)
-5. Download the credentials JSON file
-6. Copy credentials to `config/google_credentials.json`
+2. Create project → Enable **Gmail API** & **Google Calendar API**
+3. Create **OAuth 2.0 credentials** (Consent Screen)
+4. Download credentials JSON → Save to `config/google_credentials.json`
+5. Create `.env` from `.env.example` and add credentials
 
-### 4. Configuration
-
-Create a `.env` file based on `.env.example`:
+### Run Server
 
 ```bash
-cp .env.example .env
+.\venv\Scripts\python.exe -m email_calendar_mcp.main
 ```
 
-Edit `.env` with your credentials:
+### Use with Claude Desktop
 
-```
-GOOGLE_CLIENT_ID=your-client-id
-GOOGLE_CLIENT_SECRET=your-client-secret
-GOOGLE_REDIRECT_URI=http://localhost:8080/callback
-TOKEN_STORAGE_PATH=./tokens
+Edit `%APPDATA%\Claude\claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "email-calendar": {
+      "command": "python",
+      "args": ["-m", "email_calendar_mcp.main"],
+      "cwd": "C:\\path\\to\\email-calendar-mcp-server"
+    }
+  }
+}
 ```
 
-### 5. Running the Server
-
-```bash
-python -m email_calendar_mcp.main
-```
+Restart Claude Desktop and use tools in chat! 🎉
 
 ## Available Tools
 
-### Email Tools
+**Email**: fetch_emails, send_email, search_emails, mark_as_read, delete_email  
+**Calendar**: schedule_meeting, get_calendar_availability, get_events, set_reminder, update_event, delete_event
 
-- `fetch_emails()` - Search and retrieve emails
-- `send_email()` - Compose and send emails
+## Testing Visuals
 
-### Calendar Tools
+### Email Testing (Claude Desktop)
 
-- `schedule_meeting()` - Create calendar events
-- `get_calendar()` - Retrieve calendar availability
-- `set_reminders()` - Create reminders and tasks
+#### Test 1: Fetch Emails
 
-## Security Considerations
+![Email Fetch Test](testing_visuals/Email_visuals/first_v.png)
 
-- Tokens are encrypted and stored locally
-- Never commit `.env` file or credentials to version control
-- Use OAuth 2.0 for secure authentication
-- Implement proper error handling for sensitive operations
+#### Test 2: Email Search Results
 
-## Development
+![Email Search Test](testing_visuals/Email_visuals/second_V.png)
 
-### Running Tests
+#### Test 3: Email Details
 
-```bash
-pytest tests/
-```
+![Email Details Test](testing_visuals/Email_visuals/third_v.png)
 
-### Code Formatting
+#### Test 4: Send Email
 
-```bash
-black src/ tests/
-isort src/ tests/
-```
+![Email Send Test](testing_visuals/Email_visuals/fourth_v.png)
 
-### Type Checking
+#### Test 5: Email Operations
 
-```bash
-mypy src/
-```
+![Email Operations Test](testing_visuals/Email_visuals/fifth_v.png)
+
+### Calendar Testing
+
+_Calendar testing visuals coming soon..._
 
 ## License
 
-MIT License - see LICENSE file for details
-
-## Support
-
-For issues and questions, please open an issue on the repository.
+MIT
