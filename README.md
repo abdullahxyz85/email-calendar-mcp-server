@@ -90,7 +90,17 @@ Restart Claude Desktop and use tools in chat! 🎉
 
 ### Calendar Testing
 
-_Calendar testing visuals coming soon..._
+#### Test 1: Schedule Meeting
+
+![Calendar Schedule Test](testing_visuals/calendar_visuals/first_visual.png)
+
+#### Test 2: Get Calendar Events
+
+![Calendar Events Test](testing_visuals/calendar_visuals/second_visual.png)
+
+#### Test 3: Check Availability & Reminders
+
+![Calendar Availability Test](testing_visuals/calendar_visuals/third_visual.png)
 
 ## License
 
